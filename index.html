@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Launching Roblox...</title>
+  <script>
+    const params = new URLSearchParams(window.location.search);
+    const code = params.get("code");
+    const type = params.get("type") || "Server";
+
+    if (code) {
+      window.location.href = `roblox://share?code=${code}&type=${type}`;
+    } else {
+      document.body.innerHTML = "❌ No share code provided.";
+    }
+  </script>
+</head>
+<body>
+  <p>Launching Roblox...</p>
+</body>
+</html>
