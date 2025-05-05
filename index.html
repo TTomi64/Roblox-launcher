@@ -1,20 +1,38 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <title>Launching Roblox...</title>
-  <script>
-    const params = new URLSearchParams(window.location.search);
-    const code = params.get("code");
-    const type = params.get("type") || "Server";
-
-    if (code) {
-      window.location.href = `roblox://share?code=${code}&type=${type}`;
-    } else {
-      document.body.innerHTML = " No share code provided.";
-    }
-  </script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dynamic Roblox Link</title>
 </head>
 <body>
-  <p>Launching Roblox...</p>
+  <h1>Dynamic Roblox Game Launcher</h1>
+  <button onclick="launchRoblox()">Launch Roblox Game</button>
+
+  <script>
+    function launchRoblox() {
+      // Assume you're getting the share code dynamically from a server or URL
+      const shareCode = "a5c3863526e89b439242dc73d33533a1"; // Replace with your dynamic code
+      // Construct the deep link dynamically
+      const robloxLink = `roblox://share?code=${shareCode}&type=Server`;
+      // Redirect to the deep link
+      window.location.href = robloxLink;
+    }
+    // Detect if a Roblox URL is clicked
+  document.querySelectorAll('a').forEach(link => {
+    link.addEventListener('click', function(event) {
+      const url = event.target.href;
+      if (url.includes('roblox.com')) {
+        // If it's a Roblox link, redirect to the app using the deep link
+        event.preventDefault();
+        const codeMatch = url.match(/code=([a-z0-9]+)/);  // Match the code in the URL
+        if (codeMatch) {
+          const robloxLink = `roblox://share?code=${codeMatch[1]}&type=Server`;
+          window.location.href = robloxLink;  // Open in Roblox app
+        }
+      }
+    });
+  });
+  </script>
 </body>
 </html>
